@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.fruit.mapper.Fruit2Mapper">
+    <resultMap id="BaseResultMap" type="demo.fruit.dto.Fruit2">
+        <result column="id" property="id" jdbcType="DECIMAL" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="producing_area" property="producingArea" jdbcType="VARCHAR" />
+    </resultMap>
+    <update id="updateFruit2" parameterType="demo.fruit.dto.Fruit2" >
+        update fruit
+        <set >
+            <if test="id != null" >
+                id = #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="producingArea != null">
+                producing_area = #{producingArea,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=DECIMAL}
+    </update>
+
+
+</mapper>
