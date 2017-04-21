@@ -26,6 +26,27 @@
         </set>
         where id = #{id,jdbcType=DECIMAL}
     </update>
+    <select id="selectByfruit" parameterType="demo.fruit.dto.Fruit2" resultMap="BaseResultMap">
+        SELECT m.id,
+        m.name,
+        m.price,
+        m.producing_area
+        FROM fruit m
+        <where>
+            <if test="id != null">
+                and m.id like #{id,jdbcType=VARCHAR}
+            </if>
+            <if test="name != null">
+                and m.MY_NAME like #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="price != null">
+                and m.MY_AGE = #{price,jdbcType=DECIMAL}
+            </if>
+            <if test="producing_area != null">
+                and m.producing_area = #{producingarea,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

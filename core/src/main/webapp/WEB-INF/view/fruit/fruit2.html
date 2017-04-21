@@ -1,4 +1,10 @@
-<#include "../include/header.html">
+<#--
+* description: 水果管理界面
+* version: 2.0
+* author:CaiKai
+*
+-->
+<#include "../include/header.html" />
 <script type="text/javascript">
     var viewModel = kendo.observable({
         model: {},
@@ -16,15 +22,14 @@
 <body>
 <div id="page-content">
     <div class="pull-left" id="toolbar-btn" style="padding-bottom:10px;">
-        <span class="btn btn-primary k-grid-add" style="float:left;margin-right:5px;" data-bind="click:createFunction"><@spring.message "hap.new"/></span>
-        <span class="btn btn-success k-grid-save-changes" data-bind="click:saveFunction" style="float:left;margin-right:5px;"><@spring.message "hap.save"/></span>
-        <span onclick="deleteData()" class="btn btn-danger" style="float:left;"><@spring.message "hap.delete"/></span>
+        <span class="btn btn-primary k-grid-add" style="float:left;margin-right:5px;" data-bind="click:createFunction"><i class="fa fa-plus-square" style="margin-right:3px;"></i><@spring.message "hap.new"/></span>
+        <span class="btn btn-success k-grid-save-changes" data-bind="click:saveFunction" style="float:left;margin-right:5px;"><i class="fa fa-save" style="margin-right:3px;"></i><@spring.message "hap.save"/></span>
+        <span onclick="deleteData()" class="btn btn-danger" style="float:left;"><i class="fa fa-trash-o" style="margin-right:3px;"></i><@spring.message "hap.delete"/></span>
     </div>
     <script>kendo.bind($('#toolbar-btn'), viewModel);</script>
     <div class="pull-right" id="query-form" style="padding-bottom:10px;">
-            <input type="text" data-role="maskedtextbox" style="float:left;width:150px;margin-right:5px;" placeholder='<@spring.message "Fruit2.fName"/>'
-                   data-bind="value:model.fName" class="k-textbox">
-        <span class="btn btn-primary" style="float:left;width:70px" data-bind="click:queryResource" type="submit"><@spring.message "hap.query"/></span>
+            <input type="text" data-role="maskedtextbox" style="float:left;width:150px;margin-right:5px;" placeholder='<@spring.message "Fruit2.fName"/>' data-bind="value:model.fName" class="k-textbox">
+        <span class="btn btn-primary" style="float:left;width:70px" data-bind="click:queryResource" type="submit"><i class="fa fa-search" style="margin-right:3px;"></i><@spring.message "hap.query"/></span>
         <div style="clear:both"></div>
     </div>
     <script>kendo.bind($('#query-form'), viewModel);</script>
@@ -74,8 +79,12 @@
             data: 'rows',
             total: 'total',
             model: {
-                id: "fId",
-                fields: {}
+                id: "id",
+                fields: {
+                    name:{type:"String"},
+                    price:{type:"number"},
+                    producingArea:{type:"String"}
+                }
             }
         }
     });
@@ -113,13 +122,10 @@
     });
 
     function deleteData() {
-
         Hap.deleteGridSelection({
             grid: $('#Grid')
         });
-
     }
-
     Hap.autoResizeGrid("#Grid");
 
 
